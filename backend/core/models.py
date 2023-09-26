@@ -48,7 +48,8 @@ class Answer(
     is_correct = models.BooleanField(default=False)
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-class User_responses(
+
+class User_response(
     TimeStampedModel,
     Model
 ):
@@ -56,7 +57,6 @@ class User_responses(
         verbose_name = 'User_response'
         verbose_name_plural = 'User_responses'
         ordering = ["id"]
-
     selected_answer_ids = models.TextField(default='[]')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     quizz_id = models.ForeignKey(Quizz, on_delete=models.CASCADE)

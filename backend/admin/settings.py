@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django_extensions', #Great packaged to access abstract models
     'django_filters', #Used with DRF
     'rest_framework', #DRF package
+    'rest_framework.authtoken',
     'core', # New app
 ]
 
@@ -108,7 +109,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
+SECURE_SSL_REDIRECT = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -142,5 +143,10 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
