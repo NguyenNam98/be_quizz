@@ -1,6 +1,12 @@
 import json
 from rest_framework.permissions import IsAuthenticated
-from .serializers import QuizzSerializer, QuestionSerializer, AnswerSerializer, AnswerCheckSerializer, UserResponseSerializer
+from .serializers import (
+    QuizzSerializer,
+    QuestionSerializer,
+    AnswerSerializer,
+    AnswerCheckSerializer,
+    UserResponseSerializer
+)
 from .models import Quizz, Question, Answer, User_response
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
@@ -18,8 +24,9 @@ class QuizViewSet(
     permission_classes = (IsAuthenticated,)
     queryset = Quizz.objects.all()
     serializer_class = QuizzSerializer
+    lookup_field = 'id'
 
-    def list(self, request):
+    def list(self, request, *args, **kwargs):
         user_name = request.user
         user_query = User.objects.filter(username=user_name)
         user_id = user_query.first().id
@@ -33,6 +40,7 @@ class QuizViewSet(
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
+        print('instant', instance)
         serializer = self.get_serializer(instance)
         data = serializer.data
         # Include related questions and answers in the response
@@ -67,7 +75,7 @@ class AnswerCheckAPIView(APIView):
                 correct_answers = Answer.objects.filter(question_id=question_id, is_correct=True)
                 selected_answers = Answer.objects.filter(id__in=selected_answer_ids)
                 is_correct = set(selected_answers) == set(correct_answers)
-                result.append({question_id, is_correct})
+                result.append({"question_id": question_id, "is_correct": is_correct})
                 user_response_data = {
                     'user_id': user_id,
                     'quizz_id': quizz,
