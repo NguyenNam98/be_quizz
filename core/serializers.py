@@ -33,9 +33,15 @@ class QuizzSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AnswerRequestSerializer(serializers.Serializer):
+    question_id = serializers.UUIDField()
+    selected_answer = serializers.ListField(child=serializers.UUIDField())
+
+
 class AnswerCheckSerializer(serializers.Serializer):
     quizz_id = serializers.UUIDField()
-    answer = serializers.ListField()
+    answer = AnswerRequestSerializer(many=True)
+
 
 
 class UserResponseSerializer(serializers.Serializer):

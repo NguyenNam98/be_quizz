@@ -168,3 +168,4 @@ CORS_ALLOW_METHODS = [
     'OPTIONS',
 ]
 django_heroku.settings(locals())
+# APPEND_SLASH = False
