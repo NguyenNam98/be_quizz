@@ -17,4 +17,5 @@ urlpatterns += [
     path('api/quizz/<str:id>/', quizz_view.QuizViewSet.as_view({'get': 'retrieve'}), name='quizz_id'),
     path('api/quizz', quizz_view.QuizViewSet.as_view({'get': 'list'}), name='quizz_list'),
     path('api/check-answer', quizz_view.AnswerCheckAPIView.as_view(), name='check-answer'),
+    path('api/quizz-review/<str:id>', quizz_view.QuizzReviewView.as_view(), name='review-quizzed'),
 ]

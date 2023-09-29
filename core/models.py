@@ -49,6 +49,19 @@ class Answer(
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
 
 
+class User_quizz_result(
+    TimeStampedModel,
+    Model
+):
+    class Meta:
+        verbose_name = 'User_quizz_result'
+        verbose_name_plural = 'User_quizz_results'
+        ordering = ["id"]
+    score = models.TextField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    quizz_id = models.ForeignKey(Quizz, on_delete=models.CASCADE)
+
+
 class User_response(
     TimeStampedModel,
     Model
@@ -61,4 +74,5 @@ class User_response(
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     quizz_id = models.ForeignKey(Quizz, on_delete=models.CASCADE)
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
+    result_id = models.ForeignKey(User_quizz_result, on_delete=models.CASCADE)
 

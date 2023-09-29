@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from .models import Question, Answer, Quizz, User_response
+from .models import Question, Answer, Quizz, User_response, User_quizz_result
 from rest_framework_json_api import serializers
 from rest_framework import status
 from rest_framework.exceptions import APIException
@@ -54,3 +54,14 @@ class UserResponseSerializer(serializers.Serializer):
     def create(self, validated_data):
         # Create and return a new User_response instance based on the validated data
         return User_response.objects.create(**validated_data)
+
+
+class QuizzResultSerializer(serializers.Serializer):
+
+    class Meta:
+        model = User_quizz_result
+        fields = '__all__'
+
+    def create(self, validated_data):
+        # Create and return a new User_response instance based on the validated data
+        return User_quizz_result.objects.create(**validated_data)

@@ -20,3 +20,8 @@ class Answer(admin.ModelAdmin):
 @admin.register(models.User_response)
 class UserResponse(admin.ModelAdmin):
     list_display = ('id', 'quizz_id', 'question_id', 'selected_answer_ids', 'user_id')
+
+
+@admin.register(models.User_quizz_result)
+class UserQuizzResult(admin.ModelAdmin):
+    list_display = ('id', 'quizz_id', 'score', 'user_id')
