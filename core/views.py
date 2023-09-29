@@ -150,23 +150,25 @@ class QuizzReviewView(APIView):
             user_answer_objects = {item['question_id_id']: item for item in list(user_answer)}
             questions_of_quizz = Question.objects.filter(quizz_id=quizz_id).values()
             answers_right_of_questions = []
+            question_info = []
             for question in questions_of_quizz:
                 answer_right = Answer.objects.filter(question_id=question['id'], is_correct=True).values()
                 all_answer = Answer.objects.filter(question_id=question['id']).values()
                 answer_right_ids = [item['id'] for item in answer_right]
                 question['answers'] = all_answer
+                question_info.append(question)
                 answers_right_of_questions.append({
-                    'question': question,
+                    'question_id': question['id'],
                     'correct_answer': answer_right_ids,
                     'user_response_answer': json.loads(user_answer_objects[question['id']]['selected_answer_ids']),
                 })
-
             return Response({
-                'answer': answers_right_of_questions,
+                'user_answer': answers_right_of_questions,
                 'score': score,
                 'quizz_info': quizz_info,
                 'time_completed': time_completed,
-            },
+                'question_info': question_info
+                 },
                 status=status.HTTP_200_OK)
         return Response('No results', status=status.HTTP_404_NOT_FOUND)
 
