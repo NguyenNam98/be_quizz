@@ -163,11 +163,11 @@ class QuizzReviewView(APIView):
                     'user_response_answer': json.loads(user_answer_objects[question['id']]['selected_answer_ids']),
                 })
             return Response({
-                'user_answer': answers_right_of_questions,
+                'userAnswer': answers_right_of_questions,
                 'score': score,
-                'quizz_info': quizz_info,
-                'time_completed': time_completed,
-                'question_info': question_info
+                'quizzInfo': quizz_info.first(),
+                'timeCompleted': time_completed,
+                'questionInfo': question_info
                  },
                 status=status.HTTP_200_OK)
         return Response('No results', status=status.HTTP_404_NOT_FOUND)
