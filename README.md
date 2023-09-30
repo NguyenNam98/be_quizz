@@ -41,3 +41,10 @@ python manage.py runserver
 python manage.py createsuperuser
 
 ```
+
+### Run Test
+
+```
+python manage.py test
+
+```

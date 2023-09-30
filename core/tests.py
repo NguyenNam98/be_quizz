@@ -79,10 +79,8 @@ class AnswerCheckAPIViewTestCase(TestCase):
         }
         response = self.client.post('/api/check-answer', data, format='vnd.api+json')  # Replace with your actual API endpoint
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn('result', response.data)
-        self.assertEqual(len(response.data['result']), 2)
-        self.assertTrue(response.data['result'][0]['is_correct'])
-        self.assertFalse(response.data['result'][1]['is_correct'])
+        self.assertIn('score', response.data)
+        self.assertEqual(response.data['score'], '1/2')
 
     def test_check_answers_fail_body_request(self):
         data = {

@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from .models import Question, Answer, Quizz, User_response, User_quizz_result
 from rest_framework_json_api import serializers
 from rest_framework import status
